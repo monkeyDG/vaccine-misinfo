@@ -1,0 +1,5 @@
+
+.bak/knn_clf.pkl
+.bak/s_clf.pkl
+.env
+.vscode/settings.json
