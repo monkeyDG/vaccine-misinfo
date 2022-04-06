@@ -156,8 +156,8 @@ def display_source_code():
     st.write(
         """<p>
         Full source code and training data can be found at:
-        <a href="https://github.com/monkeydg/vaccine-misinformation/" target="_blank">
-        https://github.com/monkeydg/vaccine-misinformation/</a>
+        <a href="https://github.com/monkeydg/vaccine-misinfo/" target="_blank">
+        https://github.com/monkeydg/vaccine-misinfo/</a>
         </p>""",
         unsafe_allow_html=True
         )
@@ -297,7 +297,7 @@ def main():
     st.sidebar.info(
         """
         This an open source project, so you're welcome to contribute your own comments,
-        issues, or features by creating a [pull requests on github](https://github.com/monkeydg/vaccine-misinformation/).
+        issues, or features by creating a [pull requests on github](https://github.com/monkeydg/vaccine-misinfo/).
         """)
 
     scores = pd.read_pickle(SCORES_PATH)
