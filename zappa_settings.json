@@ -3,9 +3,9 @@
         "app_function": "app.app",
         "aws_region": "us-east-2",
         "profile_name": "default",
-        "project_name": "in-progress",
+        "project_name": "vaccine-misinfo",
         "runtime": "python3.9",
-        "s3_bucket": "zappa-vaccine-misinformation"
-		"slim_handler": false
+        "s3_bucket": "zappa-vaccine-misinfo"
+		"slim_handler": true
     }
 }

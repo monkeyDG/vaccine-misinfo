@@ -7,6 +7,8 @@ This code is a machine learning server to classify text or tweets as vaccine mis
 The API server is run with Flask and deployed on AWS with Zappa. 
 Hyperparameters were tuned using Gridsearch. The infrastructure is still in the code however to 
 use or test different classifiers.
+
+GNU Terry Pratchett
 """
 
 import numpy as np
@@ -32,7 +34,7 @@ from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble  import GradientBoostingClassifier, AdaBoostClassifier
-# from sklearn.svm import SVC
+from sklearn.svm import SVC
 # from sklearn.neighbors import KNeighborsClassifier
 
 import nlpaug.augmenter.word as naw
@@ -50,6 +52,7 @@ CLF_PKL_PATHS = [
     "./pkls/classifiers/g_clf.pkl",
     "./pkls/classifiers/l_clf.pkl",
     "./pkls/classifiers/k_clf.pkl",
+    "./pkls/classifiers/s_clf.pkl"
     "./pkls/classifiers/rf_clf.pkl",
     "./pkls/classifiers/dt_clf.pkl",
     "./pkls/classifiers/gb_clf.pkl",
@@ -229,13 +232,12 @@ def run_models(features, labels):
         )
     k_clf.evaluate(features, labels)
 
-    # Too memory intensive, removed:
-    # s_clf = Classifier(
-    #     SVC(C=10, gamma=0.01),
-    #     "Support Vector Machine",
-    #     "s_clf"
-    #     )
-    # s_clf.evaluate(features, labels)
+    s_clf = Classifier(
+        SVC(C=10, gamma=0.01),
+        "Support Vector Machine",
+        "s_clf"
+        )
+    s_clf.evaluate(features, labels)
 
     rf_clf = Classifier(
         RandomForestClassifier(
@@ -296,7 +298,7 @@ def run_models(features, labels):
     #     )
     # knn_clf.evaluate(features, labels)
 
-    return [g_clf, l_clf, k_clf, rf_clf, dt_clf, gb_clf, sgd_clf, ab_clf]
+    return [g_clf, l_clf, k_clf, s_clf, rf_clf, dt_clf, gb_clf, sgd_clf, ab_clf]
 
 def preprocess_query(text, cv):
     """Cleans, tokenizes, removes stopwords, and stems text. Then, fits a vectorizer"""

@@ -3,3 +3,5 @@
 .bak/s_clf.pkl
 .env
 .vscode/settings.json
+*.bak
+pkls/classifiers/s_clf.pkl

@@ -5,6 +5,8 @@ Vaccine Misinformation Checker
 
 This code is the front-end web interface used to interact with the machine learning server.
 It is deployed on an AWS EC2 t2.micro instance.
+
+GNU Terry Pratchett
 """
 
 import urllib
@@ -162,14 +164,14 @@ def display_source_code():
         unsafe_allow_html=True
         )
     # query from github to allow us to prevent accidentally exposing something
-    ml_url = "https://raw.githubusercontent.com/monkeydg/POG-bot/20c6aba563d1ef3955d9ab0b269c70f34d7eda3a/bot/modules/interactive_stats.py"
+    ml_url = "https://raw.githubusercontent.com/monkeydg/vaccine-misinfo/main/app.py"
     with urllib.request.urlopen(ml_url) as response:
         ml_text = response.read().decode("utf-8")
     
     with st.expander("Machine learning Flask server handling requests on the back-end"):
         st.code(ml_text)
 
-    st_url = "https://raw.githubusercontent.com/monkeydg/POG-bot/20c6aba563d1ef3955d9ab0b269c70f34d7eda3a/bot/modules/interactive_stats.py"
+    st_url = "https://raw.githubusercontent.com/monkeydg/vaccine-misinfo/main/streamlit_app.py"
     with urllib.request.urlopen(st_url) as response:
         st_text = response.read().decode("utf-8")
     
