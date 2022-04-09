@@ -16,6 +16,7 @@ import pandas as pd
 import sys
 import re
 import os
+from pathlib import Path
 import errno
 import string
 import pickle
@@ -44,25 +45,24 @@ from nltk import word_tokenize
 from nltk.corpus import stopwords
 
 # Paths
-CLF_PATH = os.path.join(".", "pkls", "classifiers")
+CLF_PATH = Path(__file__).parent / "pkls" / "classifiers"
 CLF_PKLS = [
-    os.path.join(CLF_PATH, "g_clf.pkl"),
-    os.path.join(CLF_PATH, "l_clf.pkl"),
-    os.path.join(CLF_PATH, "k_clf.pkl"),
-    # os.path.join(CLF_PATH, "s_clf.pkl"),
-    os.path.join(CLF_PATH, "rf_clf.pkl"),
-    os.path.join(CLF_PATH, "dt_clf.pkl"),
-    os.path.join(CLF_PATH, "gb_clf.pkl"),
-    os.path.join(CLF_PATH, "sgd_clf.pkl"),
-    os.path.join(CLF_PATH, "ab_clf.pkl"),
-    # os.path.join(CLF_PATH, "knn_clf.pkl"),
+    CLF_PATH / "g_clf.pkl",
+    CLF_PATH / "l_clf.pkl",
+    CLF_PATH / "k_clf.pkl",
+    # CLF_PATH / "s_clf.pkl",
+    CLF_PATH / "rf_clf.pkl",
+    CLF_PATH / "dt_clf.pkl",
+    CLF_PATH / "gb_clf.pkl",
+    CLF_PATH / "sgd_clf.pkl",
+    CLF_PATH / "ab_clf.pkl",
+    # CLF_PATH / "knn_clf.pkl"
     ]
-DATA_PATH = os.path.join(".", "data", "tweets.csv")
-SCORES_PATH = os.path.join(".", "pkls", "scores.pkl")
-CLF_PARAMS_PATH = os.path.join(".", "pkls", "params.pkl")
-CV_PATH = os.path.join(".", "pkls", "cv.pkl")
-NLTK_DATA_PATH = os.path.join(".", "nltk_data")
-DOTENV_PATH = '.env'
+DATA_PATH = Path(__file__).parent / "data" / "tweets.csv"
+SCORES_PATH = Path(__file__).parent / "pkls" / "scores.pkl"
+CLF_PARAMS_PATH = Path(__file__).parent / "pkls" / "params.pkl"
+CV_PATH = Path(__file__).parent / "pkls" / "cv.pkl"
+NLTK_DATA_PATH = Path(__file__).parent / "nltk_data"
 
 load_dotenv()
 CONSUMER_KEY = os.environ.get("CONSUMER_KEY")
@@ -144,11 +144,11 @@ def check_file(path):
 
 def check_nltk_data(nltk_data_path):
     """Checks if the nltk data is already downloaded and unzipped"""
-    check_file(os.path.join(nltk_data_path, 'corpora', 'stopwords', 'english'))
-    check_file(os.path.join(nltk_data_path, 'corpora', 'omw-1.4', 'citation.bib'))
-    check_file(os.path.join(nltk_data_path, 'taggers', 'averaged_perceptron_tagger', 'averaged_perceptron_tagger.pickle'))
-    check_file(os.path.join(nltk_data_path, 'corpora', 'wordnet', 'index.noun'))
-    check_file(os.path.join(nltk_data_path, 'tokenizers', 'punkt', 'english.pickle'))
+    check_file(nltk_data_path / 'corpora' / 'stopwords' / 'english')
+    check_file(nltk_data_path / 'corpora' / 'omw-1.4' / 'citation.bib')
+    check_file(nltk_data_path / 'taggers' / 'averaged_perceptron_tagger' / 'averaged_perceptron_tagger.pickle')
+    check_file(nltk_data_path / 'corpora' / 'wordnet' / 'index.noun')
+    check_file(nltk_data_path / 'tokenizers' / 'punkt' / 'english.pickle')
 
 def import_data(path, split_on=';'):
     """Imports data from a csv file and returns a pandas dataframe"""
@@ -311,7 +311,7 @@ def run_models(features, labels):
     #     )
     # knn_clf.evaluate(features, labels)
 
-    return [g_clf, l_clf, k_clf, s_clf, rf_clf, dt_clf, gb_clf, sgd_clf, ab_clf]
+    return [g_clf, l_clf, k_clf, rf_clf, dt_clf, gb_clf, sgd_clf, ab_clf]
 
 def preprocess_query(text, cv):
     """Cleans, tokenizes, removes stopwords, and stems text. Then, fits a vectorizer"""
@@ -410,7 +410,7 @@ def get_prediction():
 
     # loads the classifier and vectorizer from pickle files
     cv = pickle.load(open(CV_PATH, "rb"))
-    clf = pickle.load(open(os.path.join(CLF_PATH, f"{selected_clf}.pkl"), "rb"))
+    clf = pickle.load(open(CLF_PATH / f"{selected_clf}.pkl", "rb"))
     features = preprocess_query(text, cv)
 
     # returns 0 or 1, predicting misinformation or not
@@ -423,8 +423,8 @@ def get_prediction():
 # first, we test to see if nltk data already exists. If not, we download it
 try:
     check_nltk_data(NLTK_DATA_PATH)
-    print(f"Found nklt data at {NLTK_DATA_PATH}. Adding to nltk's serach path...")
-    logging.info(f"Found nklt data at {NLTK_DATA_PATH}. Adding to nltk's serach path...")
+    print(f"Found nklt data at {NLTK_DATA_PATH}. Adding to nltk's search path...")
+    logging.info(f"Found nklt data at {NLTK_DATA_PATH}. Adding to nltk's search path...")
     nltk.data.path.append(NLTK_DATA_PATH) # adds our nltk data to the list of paths where nltk searches for data
 except FileNotFoundError as fe:
     logging.warning(f"Unable to load nltk data: {fe}")

@@ -272,3 +272,49 @@ INFO:werkzeug: * Detected change in 'C:\\Users\\HEX\\Documents\\GitHub\\vaccine-
 INFO:werkzeug: * Restarting with watchdog (windowsapi)
 INFO:root:Found nklt data at .\nltk_data. Adding to nltk's serach path...
 INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Detected change in 'C:\\Users\\HEX\\Documents\\GitHub\\vaccine-misinfo\\app\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\HEX\\Documents\\GitHub\\vaccine-misinfo\\app\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\HEX\\Documents\\GitHub\\vaccine-misinfo\\app\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:root:Found nklt data at .\nltk_data. Adding to nltk's serach path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:root:Predicted 0 for string:
+\u0391\u03c1\u03c3\u03b5\u03bd\u03b1\u03bb - \u03a3\u03ac\u03bd\u03c4\u03b5\u03c1\u03bb\u03b1\u03bd\u03c4: (X) 0-0 \u03c4\u03b5\u03bb\u03b9\u03ba\u03cc
+INFO:werkzeug:127.0.0.1 - - [08/Apr/2022 23:25:20] "GET /predict?clf=ab_clf&url=https://twitter.com/user/status/1234567890 HTTP/1.1" 200 -
+INFO:root:Found nklt data at .\nltk_data. Adding to nltk's serach path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:root:Found nklt data at .\nltk_data. Adding to nltk's serach path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:root:Found nklt data at C:\Users\HEX\Documents\GitHub\vaccine-misinfo\app\nltk_data. Adding to nltk's search path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:root:Found nklt data at C:\Users\HEX\Documents\GitHub\vaccine-misinfo\app\nltk_data. Adding to nltk's search path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:root:Predicted 0 for string:
+\u0391\u03c1\u03c3\u03b5\u03bd\u03b1\u03bb - \u03a3\u03ac\u03bd\u03c4\u03b5\u03c1\u03bb\u03b1\u03bd\u03c4: (X) 0-0 \u03c4\u03b5\u03bb\u03b9\u03ba\u03cc
+INFO:werkzeug:127.0.0.1 - - [09/Apr/2022 13:56:18] "GET /predict?clf=ab_clf&url=https://twitter.com/user/status/1234567890 HTTP/1.1" 200 -
+INFO:root:Predicted 0 for string:
+\u0391\u03c1\u03c3\u03b5\u03bd\u03b1\u03bb - \u03a3\u03ac\u03bd\u03c4\u03b5\u03c1\u03bb\u03b1\u03bd\u03c4: (X) 0-0 \u03c4\u03b5\u03bb\u03b9\u03ba\u03cc
+INFO:werkzeug:127.0.0.1 - - [09/Apr/2022 13:56:40] "GET /predict?clf=ab_clf&url=https://twitter.com/user/status/1234567890 HTTP/1.1" 200 -
+INFO:root:Predicted 0 for string:
+\u0391\u03c1\u03c3\u03b5\u03bd\u03b1\u03bb - \u03a3\u03ac\u03bd\u03c4\u03b5\u03c1\u03bb\u03b1\u03bd\u03c4: (X) 0-0 \u03c4\u03b5\u03bb\u03b9\u03ba\u03cc
+INFO:werkzeug:127.0.0.1 - - [09/Apr/2022 13:56:45] "GET /predict?clf=ab_clf&url=https://twitter.com/user/status/1234567890 HTTP/1.1" 200 -
+INFO:root:Predicted 1 for string:
+Vaccines are poison and the government is lying
+INFO:werkzeug:127.0.0.1 - - [09/Apr/2022 13:57:07] "GET /predict?clf=ab_clf&text=Vaccines%20are%20poison%20and%20the%20government%20is%20lying HTTP/1.1" 200 -
+INFO:root:Found nklt data at C:\Users\HEX\Documents\GitHub\vaccine-misinfo\app\nltk_data. Adding to nltk's search path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [09/Apr/2022 16:39:10] "GET /predict?clf=ab_clf&text=Vaccines%20are%20poison%20and%20the%20government%20is%20lying HTTP/1.1" 200 -
+INFO:root:Found nklt data at C:\Users\HEX\Documents\GitHub\vaccine-misinfo\app\nltk_data. Adding to nltk's search path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested
+INFO:werkzeug: * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:root:Predicted 1 for string:
+Vaccines are poison and the government is lying
+INFO:werkzeug:127.0.0.1 - - [09/Apr/2022 16:40:17] "GET /predict?clf=ab_clf&text=Vaccines%20are%20poison%20and%20the%20government%20is%20lying HTTP/1.1" 200 -
+INFO:root:Found nklt data at C:\Users\HEX\Documents\GitHub\vaccine-misinfo\app\nltk_data. Adding to nltk's search path...
+INFO:root:CountVectorizer and Classifiers pickles successfully tested

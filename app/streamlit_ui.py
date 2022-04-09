@@ -13,11 +13,16 @@ import urllib
 import requests
 import pandas as pd
 import streamlit as st
+from pathlib import Path
+import os
 
-FAVICON_PATH = "./assets/favicon.png"
-HEADER_IMAGE_PATH = "./assets/header_image.jpg"
-SCORES_PATH = "./pkls/scores.pkl"
-PARAMS_PATH = "./pkls/params.pkl"
+# Can't use pathlib because of streamlit/chrome bugs. Streamlit won't host the image 
+# so chrome throws a "Not allowed to load local resource:" error, since it's preventing
+# lodaing a "local" file instead of one hosted on http://localhost ... etc
+FAVICON_PATH = Path(__file__).parent / "assets" / "favicon.png"
+HEADER_IMAGE_PATH = Path(__file__).parent / "assets" / "header.jpg"
+SCORES_PATH = Path(__file__).parent / "pkls" / "scores.pkl"
+PARAMS_PATH = Path(__file__).parent / "pkls" / "params.pkl"
 
 def activate_css():
     """Define new CSS classes for custom text highlighting in Streamlit."""
@@ -101,11 +106,14 @@ def display_dashboard(scores):
             index=8  # index of AdaBoost in the list
             )
         
-        if selected_clf == "K-Nearest Neighbors":
+        if selected_clf == "K-Nearest Neighbors" or selected_clf == "Support Vector Machine":
             st.error(
-                """K-nearest Neighbors is currently unavailable as it is too memory-intensive.
+                f"""{selected_clf} is currently unavailable as it is too memory-intensive.
                 AdaBoost will be used instead.
                 """)
+            selected_clf = "AdaBoost"
+
+        if not selected_clf:  # sets default classifier
             selected_clf = "AdaBoost"
         
         # gets the shortened name of the selected classifier
@@ -114,7 +122,6 @@ def display_dashboard(scores):
     
     run_analysis = st.button('Check text')
     
-    selected_clf = "s_clf"  # set default classifier
     if run_analysis:
         with st.spinner("Evaluating..."):
             try:
@@ -150,7 +157,7 @@ def get_misinformation(input, selected_clf):
         else:
             st.markdown("Error: unexpected response from ML server.")
     else:
-        st.write(f'Error querying ML server, HTTP status code {response.status_code}')
+        st.error(f'Error querying ML server, HTTP status code {response.status_code}')
 
 def display_source_code():
     """Streamlit layout for the source code page with the interactive_stats.py displayed."""
@@ -191,11 +198,11 @@ def display_rest_api(scores):
     \nHere's an example of how to format a request with a link to a tweet in Python:
     """)
     st.code(
-        """import requests\nresponse = requests.get('http://127.0.0.1:5000/predict?clf=s_clf&url=https://twitter.com/user/status/1234567890')"""
+        """import requests\nresponse = requests.get('http://localhost:5000/predict?clf=ab_clf&url=https://twitter.com/user/status/1234567890')"""
         )
     st.write("And here's a request with just some text to check:")
     st.code(
-        "response = requests.get('http://127.0.0.1:5000/predict?clf=s_clf&text=This is some text to check')"
+        "response = requests.get('http://localhost:5000/predict?clf=ab_clf&text=This is some text to check')"
         )
     st.write(
         """To select a specific classifier, pass the shortname based on the table below. 
@@ -274,11 +281,11 @@ param_gboost = {'learning_rate': [0.01,0.02,0.04],
 def main():
     st.set_page_config(
         page_title="Vaccine Misinformation Checker",
-        page_icon=FAVICON_PATH
+        page_icon=str(FAVICON_PATH.resolve())  # need to chagne it to a string for streamlit
     )
     activate_css()
 
-    st.image(HEADER_IMAGE_PATH)
+    st.image(str(HEADER_IMAGE_PATH.resolve()))
     st.title('Vaccine Misinformation Checker')
 
     st.sidebar.title("Page Selector")
@@ -302,8 +309,8 @@ def main():
         issues, or features by creating a [pull requests on github](https://github.com/monkeydg/vaccine-misinfo/).
         """)
 
-    scores = pd.read_pickle(SCORES_PATH)
-    params = pd.read_pickle(PARAMS_PATH)
+    scores = pd.read_pickle(SCORES_PATH.resolve())
+    params = pd.read_pickle(PARAMS_PATH.resolve())
 
     if app_mode == "Dashboard":
         display_dashboard(scores)
